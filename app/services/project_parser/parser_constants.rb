@@ -9,7 +9,5 @@ module ProjectParser
     PRIVATE_PROTECTED_REGEX = /(private|protected)\s/.freeze
     CLASS_METHOD_DEFINITION_REGEX = /^\s*class\s<<\sself/.freeze
     IDENTATION_LEVEL_REGEX = /\A\s*/.freeze
-    ENTITY_TYPES = %w[module class].freeze
-    METHOD_TYPES = %w[public class].freeze
   end
 end
