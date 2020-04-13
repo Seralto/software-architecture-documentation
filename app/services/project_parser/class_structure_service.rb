@@ -23,5 +23,9 @@ module ProjectParser
     def add_hierarchy(class_name)
       @hierarchy.push(class_name)
     end
+
+    def already_has_entity_in_hierarchy(entity)
+      @hierarchy.map(&:name).include?(entity)
+    end
   end
 end

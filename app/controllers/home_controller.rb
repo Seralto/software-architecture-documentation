@@ -2,7 +2,13 @@
 
 class HomeController < ApplicationController
   def index
-    @hierarchy = ProjectParser::ParserService.parse
+    @hierarchy = parser_service.parse
     render json: @hierarchy
+  end
+
+  private
+
+  def parser_service
+    ProjectParser::ParserService.new
   end
 end

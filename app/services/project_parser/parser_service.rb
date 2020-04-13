@@ -2,22 +2,27 @@
 
 module ProjectParser
   class ParserService
-    class << self
-      def parse
-        files.map do |file|
-          file_parser.parse(file)
-        end
+    def initialize
+      @project_hierarchy = []
+    end
+
+    def parse
+      files.map do |file|
+        file_parser.parse(file)
       end
 
-      private
+      @project_hierarchy
+    end
 
-      def files
-        Dir.glob('./tmp/folders/**/*.rb')
-      end
+    private
 
-      def file_parser
-        ProjectParser::FileParserService.new
-      end
+    def files
+      # Dir.glob('./tmp/folders/event_parser/pipedrive/won_deal.rb')
+      Dir.glob('./tmp/folders/**/*.rb')
+    end
+
+    def file_parser
+      ProjectParser::FileParserService.new(@project_hierarchy)
     end
   end
 end

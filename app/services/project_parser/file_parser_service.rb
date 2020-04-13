@@ -2,18 +2,10 @@
 
 module ProjectParser
   class FileParserService
-    MODULE_REGEX = /^\s*module\s([A-z\d]*)/.freeze
-    CLASS_REGEX = /^\s*class\s(?!<)([A-z\d]*)/.freeze
-    PUBLIC_METHOD_REGEX = /^\s*def\s(?!self\.)([a-z_]*)/.freeze
-    CLASS_METHOD_REGEX = /^\s*def\sself\.([a-z_]*)/.freeze
-    PRIVATE_PROTECTED_REGEX = /(private|protected)\s/.freeze
-    CLASS_METHOD_DEFINITION_REGEX = /^\s*class\s<<\sself/.freeze
-    IDENTATION_LEVEL_REGEX = /\A\s*/.freeze
-    ENTITY_TYPES = %w[module class].freeze
-    METHOD_TYPES = %w[public class].freeze
+    include ParserConstants
 
-    def initialize
-      @class_hierarchy = []
+    def initialize(project_hierarchy)
+      @project_hierarchy = project_hierarchy
     end
 
     def parse(filename)
@@ -25,8 +17,6 @@ module ProjectParser
         parse_line(line)
       end
       file.close
-
-      @class_hierarchy
     end
 
     private
@@ -82,43 +72,40 @@ module ProjectParser
       [public_method[1], :public]
     end
 
-    def add_method(method)
-      if @class_method_definition
-        @class_hierarchy.last.add_class_method(method)
-      else
-        @class_hierarchy.last.add_public_method(method)
-      end
-    end
-
     def insert_entity(entity, type)
       if @level.zero?
-        @class_hierarchy.push(class_structure(entity, type))
+        return if @project_hierarchy.map(&:name).include?(entity)
+
+        @project_hierarchy.push(class_structure(entity, type))
         return
       end
 
-      structure = @class_hierarchy.first
-      (@level - 1).times do
-        structure = structure.hierarchy.first
-      end
+      structure = find_structure_in_level
+      return if structure.already_has_entity_in_hierarchy(entity)
 
       structure.add_hierarchy(class_structure(entity, type))
     end
 
     def insert_method(method, type)
       if @level.zero?
-        @class_hierarchy.send("add_#{type}_method", method)
+        @project_hierarchy.send("add_#{type}_method", method)
         return
       end
 
-      structure = @class_hierarchy.first
-      (@level - 1).times do
-        structure = structure.hierarchy.first
-      end
+      structure = find_structure_in_level
 
       structure.send("add_#{type}_method", method)
     end
 
-    def class_structure(name, type = 'class')
+    def find_structure_in_level
+      structure = @project_hierarchy.first
+      (@level - 1).times do
+        structure = structure.hierarchy.first
+      end
+      structure
+    end
+
+    def class_structure(name, type)
       ProjectParser::ClassStructureService.new(name, type)
     end
   end
