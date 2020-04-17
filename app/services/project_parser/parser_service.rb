@@ -19,8 +19,8 @@ module ProjectParser
     def files
       # Dir.glob('./tmp/folders-old/event_parser/pipedrive/won_deal.rb')
       # Dir.glob('./tmp/folders-old/test.rb')
-      # Dir.glob('./tmp/folders-old/**/*.rb')
-      Dir.glob('./tmp/folders/**/*.rb')
+      Dir.glob('./tmp/folders-old/**/*.rb')
+      # Dir.glob('./tmp/folders/**/*.rb')
     end
 
     def file_parser

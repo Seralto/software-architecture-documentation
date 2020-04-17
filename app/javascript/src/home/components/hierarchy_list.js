@@ -2,16 +2,16 @@ import React from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import HierarchyItem from './hierarchi_item';
-
 const HierarchyList = props =>{
   const renderItem = item => {
-
     return (
       <li key={uuidv4()}>
-        <a href='#'>{item.name}</a>
+        <div className='entity-box'>
+          <div className=''></div>
+          {item.name}
+        </div>
 
-        <HierarchyItem hierarchy={item.hierarchy} />
+        { item.hierarchy.length > 0 && <HierarchyList hierarchy={item.hierarchy} /> }
       </li>
     )
   }
@@ -24,11 +24,9 @@ const HierarchyList = props =>{
   }
 
   return (
-    <div>
-      <ul>
-        { renderHierarchy(props) }
-      </ul>
-    </div>
+    <ul>
+      { renderHierarchy(props) }
+    </ul>
   );
 }
 
