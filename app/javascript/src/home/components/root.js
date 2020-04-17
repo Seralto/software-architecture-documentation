@@ -28,7 +28,6 @@ class Root extends Component {
 
     return (
       <div className='tree'>
-        <h1>Hierarchy</h1>
         <HierarchyList hierarchy={hierarchy} />
       </div>
     );
