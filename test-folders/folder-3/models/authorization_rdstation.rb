@@ -1,0 +1,2 @@
+class AuthorizationRdstation < Authorization
+end

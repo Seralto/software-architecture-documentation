@@ -1,0 +1,2 @@
+class AuthorizationPipedrive < Authorization
+end

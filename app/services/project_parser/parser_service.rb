@@ -18,7 +18,8 @@ module ProjectParser
 
     def files
       # Dir.glob('./test-folders/folder-1/**/*.rb')
-      Dir.glob('./test-folders/folder-2/**/*.rb')
+      # Dir.glob('./test-folders/folder-2/**/*.rb')
+      Dir.glob('./test-folders/folder-3/**/*.rb')
     end
 
     def file_parser
