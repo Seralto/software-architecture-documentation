@@ -1,9 +1,11 @@
-module Pipedrive
-  module Error
-    class InvalidClient < StandardError; end
-    class InvalidRefreshToken < StandardError; end
-    class InvalidClientInstance < StandardError; end
-    class Unauthorized < StandardError; end
-    class InternalServerError < StandardError; end
-  end
-end
+# TODO: Fix parser for not nested classes
+
+# module Pipedrive
+#   module Error
+#     class InvalidClient < StandardError; end
+#     class InvalidRefreshToken < StandardError; end
+#     class InvalidClientInstance < StandardError; end
+#     class Unauthorized < StandardError; end
+#     class InternalServerError < StandardError; end
+#   end
+# end
