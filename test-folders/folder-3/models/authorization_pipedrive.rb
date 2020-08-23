@@ -1,2 +1,0 @@
-class AuthorizationPipedrive < Authorization
-end

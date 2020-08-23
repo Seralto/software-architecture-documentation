@@ -1,2 +1,0 @@
-class AuthorizationRdstation < Authorization
-end
