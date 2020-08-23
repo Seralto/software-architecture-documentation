@@ -20,8 +20,9 @@ const HierarchyItem = props => {
 
   return (
     <div className='entity-box'>
-      <div className='entity-box-header'>
-        {item.name}
+      <div className={`entity-box-header type-${item.type}`}>
+        {item.name}<br/>
+        <small>{item.type === 'class' ? 'Class' : 'Module'}</small>
       </div>
 
       <div className='entity-box-body'>

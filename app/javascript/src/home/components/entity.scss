@@ -6,6 +6,7 @@
   font-size: 14px;
   display: inline-block;
   min-width: 100px;
+  overflow:hidden;
 
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -16,7 +17,7 @@
   -moz-transition: all 0.5s;
 
   &:hover, &:hover+ul li .entity-box {
-    background: rgb(232, 253, 246); color: #111; border: 1px solid #94a0b4;
+    background: #e8fdf6; color: #222; border: 1px solid #94a0b4;
   }
 
   &:hover+ul li::after,
@@ -29,13 +30,22 @@
   .entity-box-header {
     font-weight: bold;
     padding: 5px 10px;
-    background-color: aquamarine;
-    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+  }
+
+  .type-module {
+    background-color: #7fffd4bf;
+  }
+
+  .type-class {
+    background-color: #7ffff9bf;
   }
 
   .entity-box-body {
     font-size: 0.9em;
     text-align: left;
+    background-color: #fff;
+    border-radius: 5px;
 
     .methods-box {
       padding: 5px 10px;
@@ -54,6 +64,7 @@
         font-family: 'monospace';
         font-size: 0.9em;
         display: block;
+        margin-bottom: 2px;
       }
     }
   }
